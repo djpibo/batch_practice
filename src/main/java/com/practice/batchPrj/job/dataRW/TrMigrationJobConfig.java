@@ -50,7 +50,7 @@ public class TrMigrationJobConfig {
 
     @JobScope
     @Bean
-    public Step trMigrationStep(ItemReader trOrdersReader){
+    public Step trMigrationStep(ItemReader<Orders> trOrdersReader){
         return stepBuilderFactory.get(JOB_NAME+"_step")
                 .<Orders, Settlements>chunk(5)   // chunk 단위로 모아서 commit
                 .reader(trOrdersReader)
@@ -75,7 +75,7 @@ public class TrMigrationJobConfig {
                 .repository(orderRepository)
                 .methodName("findAll")
                 .pageSize(5)
-                .arguments(Arrays.asList())
+                .arguments(List.of())
                 .sorts(Collections.singletonMap("id", Sort.Direction.ASC))
                 .build();
     }

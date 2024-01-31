@@ -12,7 +12,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -41,7 +40,9 @@ public class FileDataJobConfig {
 
     @JobScope
     @Bean
-    public Step fileDataStep(FlatFileItemReader playerFlatFileItemReader, ItemProcessor playerYearsItemProcessor, FlatFileItemWriter playerYearsItemWriter){
+    public Step fileDataStep(FlatFileItemReader<Player> playerFlatFileItemReader
+            , ItemProcessor<Player,PlayerYears> playerYearsItemProcessor
+            , FlatFileItemWriter<PlayerYears> playerYearsItemWriter){
         return stepBuilderFactory.get(JOB_NAME+"_step")
                 .<Player, PlayerYears>chunk(5)
                 .reader(playerFlatFileItemReader)
