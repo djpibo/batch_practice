@@ -1,4 +1,4 @@
-package com.practice.batchPrj.job;
+package com.practice.batchPrj.job.basic;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class BasicJobConfig {
-    private static final String JOB_NAME = "basic_job";
+    private static final String JOB_NAME = "basic_job"; // Application > JobParameter에 설정할 값
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
