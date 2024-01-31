@@ -40,7 +40,7 @@ public class JobListenerConfig {
 				.incrementer(new RunIdIncrementer())
 				.listener(new JobLoggerListener())
 				//.validator(new FileParamValidator())
-				.validator(multipleValidator())
+				//.validator(multipleValidator())
 				.start(jobListenerStep)
 				.build();
 	}

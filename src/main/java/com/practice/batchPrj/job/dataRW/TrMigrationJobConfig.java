@@ -25,6 +25,7 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Sort;
 
 import java.util.Arrays;
@@ -41,6 +42,7 @@ public class TrMigrationJobConfig {
     private final SettlementRepository settlementRepository;
 
     @Bean
+    @Primary
     public Job trMigrationJob(Step trMigrationStep){
         return jobBuilderFactory.get(JOB_NAME)
                 .incrementer(new RunIdIncrementer())

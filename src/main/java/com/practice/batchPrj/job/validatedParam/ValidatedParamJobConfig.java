@@ -36,7 +36,7 @@ public class ValidatedParamJobConfig {
         return jobBuilderFactory.get(JOB_NAME)
                 .incrementer(new RunIdIncrementer())
                 //.validator(new FileParamValidator())
-                .validator(multipleValidator())
+                //.validator(multipleValidator())
                 .start(validatedParamStep)
                 .build();
     }

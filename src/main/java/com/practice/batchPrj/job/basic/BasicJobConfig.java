@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class BasicJobConfig {
-    private static final String JOB_NAME = "basic_job"; // Application > JobParameter에 설정할 값
+    private static final String JOB_NAME = "basicJob"; // Application > JobParameter에 설정할 값
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
