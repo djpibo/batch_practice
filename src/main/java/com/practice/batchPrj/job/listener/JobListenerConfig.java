@@ -12,6 +12,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.CompositeJobParametersValidator;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -33,12 +34,13 @@ public class JobListenerConfig {
 	private final StepBuilderFactory stepBuilderFactory;
 
 	private final JobBuilderFactory jobBuilderFactory;
+	private final JobRepository jobRepository;
 
 	@Bean
 	public Job jobListenerJob(Step jobListenerStep){  // 내부 클래스에서 직접 찾아서 호출하는 방식이 아닌, 전달인자에 추가하는 방법 = Bean을 통한 주입방식
 		return jobBuilderFactory.get(JOB_NAME)
 				.incrementer(new RunIdIncrementer())
-				.listener(new JobLoggerListener())
+				.listener(new JobLoggerListener(jobRepository))
 				//.validator(new FileParamValidator())
 				//.validator(multipleValidator())
 				.start(jobListenerStep)
